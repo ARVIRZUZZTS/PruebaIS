@@ -1,65 +1,220 @@
+"use client"
+
+import { useState } from "react"
+import Header from "@/components/header";
+import Nav from "@/components/nav";
+import Btn from "@/components/btn"
+import Btnn from "@/components/btnn"
+import Alert from "@/components/alert"
+import Warning from "@/components/warning"
+import Confirm from "@/components/confirm"
+import Sidebar from "@/components/sidebar"
+import Breadcrumb from "@/components/breadcrumb"
+import Input from "@/components/input"
+import Checkbox from "@/components/checkbox"
+import Radio from "@/components/radio"
+import Select from "@/components/select"
+
 import Image from "next/image";
 
 export default function Home() {
+  const [alertOpen, setAlertOpen] = useState(false)
+  const [warningOpen, setWarningOpen] = useState(false)
+  const [confirmOpen, setConfirmOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main className="min-h-screen text-[var(--dark)] bg-gradient-to-br from-[var(--white)] via-[var(--whitte)] to-[var(--back)]">
+
+      <header className="py-10 text-center bg-[var(--wine)] text-white">
+        <h1 className="text-4xl font-bold">
+          Propuesta de <span className="text-[var(--whitte)]">Stack</span><span className="text-[var(--pinky)]">Overflow</span>
+        </h1>
+      </header>
+
+      <section id="paleta" className="py-10 text-center">
+        <h2 className="text-3xl font-semibold mb-6">
+          Paleta de <span className="text-[var(--pinky)]">COLORES</span>
+        </h2>
+
+        <div className="flex justify-center">
+          <Image
+            src="/PaletteIS.png"
+            alt="Paleta de colores"
+            width={900}
+            height={400}
+          />
+        </div>
+      </section>
+
+      {/* COMPONENTES */}
+      <section className="componente py-10 px-10">
+        <h2 className="text-3xl font-semibold mb-10 text-center">
+          Diseño de Componentes
+        </h2>
+
+        {/*-----------------------------------------------------------------------*/}
+
+        <div className="bg-[var(--softRed)] text-[var(--whitte)] p-10 rounded-xl">
+          <h2 className="text-2xl font-semibold mb-6">
+            Diseño de Header
+          </h2>
+          <div className="p-10 bg-white text-[var(--dark)] rounded-lg shadow">
+            <Header />
+          </div>
+        </div>
+        {/*-----------------------------------------------------------------------*/}
+        <div className="bg-[var(--softRed)] my-10 text-[var(--whitte)] p-10 rounded-xl">
+          <h2 className="text-2xl font-semibold mb-6">
+            Diseño de Nav
+          </h2>
+          <div className="p-10 bg-white text-[var(--dark)] rounded-lg shadow">
+            <Nav />
+          </div>
+        </div>
+        {/*-----------------------------------------------------------------------*/}
+        <div className="bg-[var(--softRed)] my-10 text-[var(--whitte)] p-10 rounded-xl">
+          <h2 className="text-2xl font-semibold mb-6">
+            Diseño de Botones, Botones Negativos, Alerts, Warnings y Confirm
+          </h2>
+
+          <div className="p-10 bg-white text-[var(--dark)] rounded-lg shadow flex gap-6">
+
+            <Btn onClick={() => setAlertOpen(true)}>
+              Alert
+            </Btn>
+
+            <Btn onClick={() => setWarningOpen(true)}>
+              Warning
+            </Btn>
+
+            <Btn onClick={() => setConfirmOpen(true)}>
+              Confirm
+            </Btn>
+
+            <Btnn>
+              Cancelar
+            </Btnn>
+
+          </div>
+
+          <Alert
+            open={alertOpen}
+            message="Esto es un alert"
+            onClose={() => setAlertOpen(false)}
+          />
+
+          <Warning
+            open={warningOpen}
+            message="Esto es un warning"
+            onClose={() => setWarningOpen(false)}
+          />
+
+          <Confirm
+            open={confirmOpen}
+            message="¿Estás seguro?"
+            onConfirm={() => {
+              alert("Confirmado")
+              setConfirmOpen(false)
+            }}
+            onCancel={() => setConfirmOpen(false)}
+          />
+
+        </div>
+
+        {/*-----------------------------------------------------------------------*/}
+        <div className="bg-[var(--softRed)] my-10 text-[var(--whitte)] p-10 rounded-xl">
+
+          <h2 className="text-2xl font-semibold mb-6">
+            Diseño de Sidebar
+          </h2>
+
+          <div className="p-10 bg-white text-[var(--dark)] rounded-lg shadow flex gap-6">
+
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="px-5 py-2 rounded-[5px] bg-[var(--defRed)] text-[var(--whitte)]
+              shadow-[0px_5px_0px_var(--isBlue)] hover:bg-[var(--pinky)] hover:rotate-[-2deg]"
+            >
+              Más
+            </button>
+
+          </div>
+          
+          {/*-----------------------------------------------------------------------*/}
+          <div className="bg-[var(--softRed)] my-10 text-[var(--whitte)] p-10 rounded-xl">
+
+            <h2 className="text-2xl font-semibold mb-6">
+              Diseño de BreadCrumb
+            </h2>
+
+            <div className="p-10 bg-white text-[var(--dark)] rounded-lg shadow">
+
+              <Breadcrumb />
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+        <Sidebar
+          open={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+
+        {/*-----------------------------------------------------------------------*/}
+        <div className="bg-[var(--softRed)] my-10 text-[var(--whitte)] p-10 rounded-xl">
+                  
+          <h2 className="text-2xl font-semibold mb-6">
+            Diseño de Form, Input, Checkbox, Radio Button y Select
+          </h2>
+                  
+          <div className="
+            p-10
+            bg-[var(--whitte)]
+            text-[var(--isBlue)]
+            rounded-[5px]
+            border-y-[5px] border-x-[2px]
+            border-[var(--softRed)]
+            shadow-[0_0_9px_var(--wine)]
+            flex flex-col gap-10
+          ">
+          
+            {/* Nombre */}
+            <Input placeholder="Nombre del comprador" />
+                  
+            {/* Email */}
+            <Input placeholder="Correo electrónico" type="email" />
+                  
+            {/* Ciudad */}
+            <Select />
+                  
+            {/* Tipo de inmueble */}
+            <div className="flex flex-col gap-4">
+              <Radio name="tipo" label="Casa" />
+              <Radio name="tipo" label="Departamento" />
+              <Radio name="tipo" label="Terreno" />
+            </div>
+                  
+            {/* Servicios */}
+            <div className="flex flex-col gap-4">
+              <Checkbox label="Garaje" />
+              <Checkbox label="Piscina" />
+              <Checkbox label="Jardín" />
+            </div>
+                  
+            {/* Botones */}
+            <div className="flex gap-6">
+              <Btn>Buscar</Btn>
+              <Btnn>Cancelar</Btnn>
+            </div>
+                  
+          </div>
+                  
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+    </main>
   );
 }
