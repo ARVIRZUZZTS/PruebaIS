@@ -8,6 +8,9 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-    env_file:
-      - .env
-    entrypoint: ["/bin/sh", "-c", "sed -i 's/\\r//' .env 2>/dev/null; npm run dev"]
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - DIRECT_URL=${DIRECT_URL}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+    entrypoint: ["/bin/sh", "-c", "npm run dev"]
