@@ -10,3 +10,4 @@ services:
       - /app/node_modules
     env_file:
       - .env
+    entrypoint: ["/bin/sh", "-c", "sed -i 's/\\r//' .env 2>/dev/null; npm run dev"]
